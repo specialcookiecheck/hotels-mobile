@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Hotels!</string>
+    <string name="button_addHotel">Add Hotel</string>
+    <string name="hint_hotelName">Hotel Name</string>
+    <string name="hint_hotelDescription">Description </string>
+    <string name="hint_hotelStreet">Street + Number </string>
+    <string name="hint_hotelCity">City </string>
+    <string name="hint_hotelState">State/ Province </string>
+    <string name="hint_hotelCountry">Country </string>
+    <string name="hint_hotelPhone">Phone </string>
+    <string name="hint_hotelEmail">Email </string>
+    <string name="placeholder_hotelCoordinates">Latitude, Longitude </string>
+    <string name="menu_addHotels">Add</string>
+    <string name="menu_cancelHotels">Cancel</string>
+    <string name="enter_hotels_title"> Please enter the Hotel Name </string>
+    <string name="save_hotel"> Save Hotel </string>
+    <string name="button_addImage"> Add Image </string>
+    <string name="select_hotel_image">Select image</string>
+    <string name="change_hotel_image">Change image</string>
+    <string name="button_location">Set Location</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="menu_deleteHotel">Delete</string>
+    <string name="menu_saveHotel">Save</string>
+    <string name="title_activity_hotels_maps">Map of All Hotels </string>
+    <string name="map_select_hotel">Select Hotel </string>
+</resources>
