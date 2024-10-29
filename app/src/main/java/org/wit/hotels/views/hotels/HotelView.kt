@@ -30,7 +30,7 @@ class HotelView : AppCompatActivity() {
 
         presenter = HotelPresenter(this)
 
-        binding.chooseImage.setOnClickListener {
+        binding.addHotelImage.setOnClickListener {
             presenter.cacheHotels(binding.hotelName.text.toString(),
                 binding.hotelDescription.text.toString(),
                 binding.hotelStreet.text.toString(),
@@ -59,7 +59,7 @@ class HotelView : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         println("HotelView onCreateOptionsMenu started")
-        menuInflater.inflate(R.menu.menu_hotels, menu)
+        menuInflater.inflate(R.menu.menu_hotel, menu)
         val deleteMenu: MenuItem = menu.findItem(R.id.hotel_delete)
         deleteMenu.isVisible = presenter.edit
         return super.onCreateOptionsMenu(menu)
@@ -112,7 +112,7 @@ class HotelView : AppCompatActivity() {
             .load(hotel.image)
             .into(binding.hotelImage)
         if (hotel.image != Uri.EMPTY) {
-            binding.chooseImage.setText(R.string.change_hotel_image)
+            binding.addHotelImage.setText(R.string.change_hotel_image)
         }
 
     }
@@ -123,7 +123,7 @@ class HotelView : AppCompatActivity() {
         Picasso.get()
             .load(image)
             .into(binding.hotelImage)
-        binding.chooseImage.setText(R.string.change_hotel_image)
+        binding.addHotelImage.setText(R.string.change_hotel_image)
     }
 
 }

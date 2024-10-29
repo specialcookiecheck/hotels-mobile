@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/hotel_add"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/baseline_domain_add_24"
         android:title="@string/menu_addHotels"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/hotel_map"
-        android:icon="@android:drawable/ic_menu_mapmode"
-        android:title="@string/menu_addHotels"
+        android:icon="@drawable/map_foreground"
+        android:title="@string/menu_openHotelsMap"
         app:showAsAction="always"/>
 </menu>

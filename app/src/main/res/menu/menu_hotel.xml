@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/hotel_save"
+        android:icon="@drawable/save_foreground"
+        android:shadowColor="@color/text_shadow"
+        android:shadowRadius="2"
+        android:shadowDx="-1"
+        android:shadowDy="-1"
+        android:title="@string/menu_saveHotel"
+        android:textStyle="bold"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/hotel_cancel"
+        android:icon="@drawable/cancel_foreground"
+        android:shadowColor="@color/text_shadow"
+        android:shadowRadius="2"
+        android:shadowDx="-1"
+        android:shadowDy="-1"
+        android:title="@string/menu_cancelHotels"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/hotel_delete"
+        android:icon="@drawable/baseline_delete_forever_24"
+        android:shadowColor="@color/text_shadow"
+        android:shadowRadius="2"
+        android:shadowDx="-1"
+        android:shadowDy="-1"
+        android:title="@string/menu_deleteHotel"
+        android:visible="false"
+        app:showAsAction="always" />
+</menu>
