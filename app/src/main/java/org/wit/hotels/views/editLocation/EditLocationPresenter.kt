@@ -28,6 +28,8 @@ class EditLocationPresenter (val view: EditLocationView) {
 
     fun initMap(map: GoogleMap) {
         i("EditLocationPresenter initMap started")
+        map.uiSettings.isZoomControlsEnabled = true
+        map.uiSettings.isCompassEnabled = true
         location.lat = hotel.lat
         location.lng = hotel.lng
         val lat = round(hotel.lat *100) /100
