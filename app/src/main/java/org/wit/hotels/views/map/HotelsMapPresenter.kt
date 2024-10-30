@@ -7,10 +7,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hotels.main.MainApp
+import org.wit.hotels.models.HotelModel
 import timber.log.Timber.i
 
 class HotelsMapPresenter(val view: HotelsMapView) {
     var app: MainApp
+
+    private lateinit var mapInit: GoogleMap
 
     init {
         i("HotelsMapPresenter init started")
@@ -19,6 +22,7 @@ class HotelsMapPresenter(val view: HotelsMapView) {
 
     fun doPopulateMap(map: GoogleMap) {
         i("HotelsMapPresenter doPopulateMap started")
+        mapInit = map
         map.uiSettings.isZoomControlsEnabled = true
         map.uiSettings.isCompassEnabled = true
         // UiSettings.setZoomControlsEnabled(true)
@@ -27,14 +31,21 @@ class HotelsMapPresenter(val view: HotelsMapView) {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.name).position(loc)
             map.addMarker(options)?.tag = it.id
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 6f))
         }
     }
 
     fun doMarkerSelected(marker: Marker) {
         i("HotelsMapPresenter doMarkerSelected started")
         val tag = marker.tag as Long
-        val hotels = app.hotels.findById(tag)
-        if (hotels != null) view.showHotels(hotels)
+        val hotel = app.hotels.findById(tag)
+        if (hotel != null) view.showHotel(hotel)
+    }
+
+    fun hotelSelectZoom(hotel: HotelModel) {
+        i("HotelsMapPresenter hotelSelectZoom started")
+        i("hotelZoom: " +hotel.zoom)
+        val loc = LatLng(hotel.lat, hotel.lng)
+        mapInit.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, hotel.zoom))
     }
 }

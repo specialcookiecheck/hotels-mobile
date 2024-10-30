@@ -50,7 +50,7 @@ class EditLocationPresenter (val view: EditLocationView) {
         i("EditLocationPresenter doUpdateLocation started")
         location.lat = lat
         location.lng = lng
-        location.zoom = 12f
+        location.zoom = zoom
     }
 
     fun doOnBackPressed() {

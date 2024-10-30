@@ -19,7 +19,7 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
     GoogleMap.OnMarkerDragListener,
     GoogleMap.OnMarkerClickListener {
 
-    private lateinit var map: GoogleMap
+    lateinit var map: GoogleMap
     lateinit var presenter: EditLocationPresenter
     var location = LocationModel()
     var hotel = HotelModel()
@@ -51,7 +51,6 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
 
     override fun onMarkerDragStart(marker: Marker) {
         i("EditLocationView onMarkerDragStart started")
-        location = LocationModel(marker.position.latitude, marker.position.longitude, 8f)
         val loc = LatLng(marker.position.latitude, marker.position.longitude)
         val name = marker.title
         marker.snippet = "Drag to update location for $name"
@@ -68,17 +67,16 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
         val lat = round(marker.position.latitude)
         val lng = round(marker.position.longitude)
         marker.snippet = "New location: $lat, $lng (click to confirm)"
-        presenter.doUpdateLocation(marker.position.latitude,
-            marker.position.longitude,
-            map.cameraPosition.zoom)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
         i("EditLocationView onMarkerClick started")
-        location.zoom = 12f
         val loc = LatLng(marker.position.latitude, marker.position.longitude)
+        presenter.doUpdateLocation(marker.position.latitude,
+            marker.position.longitude,
+            map.cameraPosition.zoom)
         presenter.doUpdateMarker(marker)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15f))
         return false
     }
 }

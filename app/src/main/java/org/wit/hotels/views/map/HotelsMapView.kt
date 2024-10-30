@@ -2,7 +2,9 @@ package org.wit.hotels.views.map
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
 import org.wit.hotels.databinding.ActivityHotelsMapsBinding
@@ -35,13 +37,14 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
             presenter.doPopulateMap(it)
         }
     }
-    fun showHotels(hotel: HotelModel) {
-        i("HotelsMapView showHotels started")
+    fun showHotel(hotel: HotelModel) {
+        i("HotelsMapView showHotel started")
         contentBinding.currentName.text = hotel.name
         contentBinding.currentDescription.text = hotel.description
         Picasso.get()
             .load(hotel.image)
             .into(contentBinding.currentImage)
+        presenter.hotelSelectZoom(hotel)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

@@ -22,6 +22,6 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="menu_deleteHotel">Delete</string>
     <string name="menu_saveHotel">Save</string>
-    <string name="title_activity_hotels_maps">Map of All Hotels </string>
+    <string name="title_activity_hotels_maps">All Hotels </string>
     <string name="map_select_hotel">Select Hotel </string>
 </resources>
