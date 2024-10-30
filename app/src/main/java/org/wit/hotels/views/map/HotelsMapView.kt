@@ -7,7 +7,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
-import org.wit.hotels.databinding.ActivityHotelsMapsBinding
+import org.wit.hotels.databinding.ActivityHotelsMapBinding
 import org.wit.hotels.databinding.ContentHotelsMapsBinding
 import org.wit.hotels.main.MainApp
 import org.wit.hotels.models.HotelModel
@@ -15,7 +15,7 @@ import timber.log.Timber.i
 
 class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
 
-    private lateinit var binding: ActivityHotelsMapsBinding
+    private lateinit var binding: ActivityHotelsMapBinding
     private lateinit var contentBinding: ContentHotelsMapsBinding
     lateinit var app: MainApp
     lateinit var presenter: HotelsMapPresenter
@@ -24,7 +24,7 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
         i("HotelsMapView onCreate started")
         super.onCreate(savedInstanceState)
         app = application as MainApp
-        binding = ActivityHotelsMapsBinding.inflate(layoutInflater)
+        binding = ActivityHotelsMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 

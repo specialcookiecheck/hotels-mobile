@@ -5,6 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.hotels.R
@@ -12,11 +18,11 @@ import org.wit.hotels.databinding.ActivityHotelBinding
 import org.wit.hotels.models.HotelModel
 import timber.log.Timber.i
 
-class HotelView : AppCompatActivity() {
+class HotelView : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityHotelBinding
     private lateinit var presenter: HotelPresenter
-    var hotel = HotelModel()
+    var hotelInit = HotelModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         println("HotelView onCreate started")
@@ -55,6 +61,10 @@ class HotelView : AppCompatActivity() {
                 )
             presenter.doSetLocation()
         }
+
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.hotelViewMap) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -96,7 +106,8 @@ class HotelView : AppCompatActivity() {
     }
 
     fun showHotel(hotel: HotelModel) {
-        println("HotelView showHotel started")
+        i("HotelView showHotel started")
+        hotelInit = hotel
 
         binding.hotelName.setText(hotel.name)
         binding.hotelDescription.setText(hotel.description)
@@ -118,7 +129,7 @@ class HotelView : AppCompatActivity() {
     }
 
     fun updateImage(image: Uri){
-        println("HotelView updateImage started")
+        i("HotelView updateImage started")
         i("Image updated")
         Picasso.get()
             .load(image)
@@ -126,4 +137,16 @@ class HotelView : AppCompatActivity() {
         binding.addHotelImage.setText(R.string.change_hotel_image)
     }
 
+    override fun onMapReady(googleMap: GoogleMap) {
+        i("HotelView onMapReady started")
+        i(hotelInit.toString())
+        i(hotelInit.name)
+        val loc = LatLng(hotelInit.lat, hotelInit.lng)
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(loc)
+                .title(hotelInit.name)
+        )
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, hotelInit.zoom))
+    }
 }

@@ -28,6 +28,7 @@ class EditLocationPresenter (val view: EditLocationView) {
 
     fun initMap(map: GoogleMap) {
         i("EditLocationPresenter initMap started")
+        map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.uiSettings.isZoomControlsEnabled = true
         map.uiSettings.isCompassEnabled = true
         location.lat = hotel.lat
@@ -41,7 +42,7 @@ class EditLocationPresenter (val view: EditLocationView) {
             .draggable(true)
             .position(loc)
         map.addMarker(options)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 6f))
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 6f))
         map.setOnMarkerDragListener(view)
         map.setOnMarkerClickListener(view)
     }
