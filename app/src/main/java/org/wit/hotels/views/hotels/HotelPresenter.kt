@@ -10,7 +10,9 @@ import org.wit.hotels.main.MainApp
 import org.wit.hotels.models.LocationModel
 import org.wit.hotels.models.HotelModel
 import org.wit.hotels.views.editLocation.EditLocationView
+import org.wit.hotels.views.map.HotelsMapView
 import timber.log.Timber
+import timber.log.Timber.i
 
 class HotelPresenter(private val view: HotelView) {
 
@@ -141,5 +143,11 @@ class HotelPresenter(private val view: HotelView) {
                     AppCompatActivity.RESULT_CANCELED -> { } else -> { }
                 }
             }
+    }
+
+    fun doShowHotelsMap() {
+        i("HotelsListPresenter doShowHotelsMap started")
+        val launcherIntent = Intent(view, HotelsMapView::class.java)
+        mapIntentLauncher.launch(launcherIntent)
     }
 }

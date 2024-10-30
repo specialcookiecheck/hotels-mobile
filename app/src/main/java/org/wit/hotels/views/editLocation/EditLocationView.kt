@@ -54,7 +54,7 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
         val loc = LatLng(marker.position.latitude, marker.position.longitude)
         val name = marker.title
         marker.snippet = "Drag to update location for $name"
-        map.moveCamera(CameraUpdateFactory.newLatLng(loc))
+        map.animateCamera(CameraUpdateFactory.newLatLng(loc))
     }
 
     override fun onMarkerDrag(marker: Marker) {
@@ -76,7 +76,7 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
             marker.position.longitude,
             map.cameraPosition.zoom)
         presenter.doUpdateMarker(marker)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15f))
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 15f))
         return false
     }
 }

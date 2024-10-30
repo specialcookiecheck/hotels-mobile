@@ -23,6 +23,7 @@ class HotelsMapPresenter(val view: HotelsMapView) {
     fun doPopulateMap(map: GoogleMap) {
         i("HotelsMapPresenter doPopulateMap started")
         mapInit = map
+        map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.uiSettings.isZoomControlsEnabled = true
         map.uiSettings.isCompassEnabled = true
         // UiSettings.setZoomControlsEnabled(true)
@@ -46,6 +47,6 @@ class HotelsMapPresenter(val view: HotelsMapView) {
         i("HotelsMapPresenter hotelSelectZoom started")
         i("hotelZoom: " +hotel.zoom)
         val loc = LatLng(hotel.lat, hotel.lng)
-        mapInit.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, hotel.zoom))
+        mapInit.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, hotel.zoom))
     }
 }
