@@ -26,6 +26,7 @@ class HotelsMapPresenter(val view: HotelsMapView) {
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.uiSettings.isZoomControlsEnabled = true
         map.uiSettings.isCompassEnabled = true
+        map.isTrafficEnabled = true
         // UiSettings.setZoomControlsEnabled(true)
         map.setOnMarkerClickListener(view)
         app.hotels.findAll().forEach {

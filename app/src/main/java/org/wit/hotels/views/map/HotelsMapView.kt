@@ -41,12 +41,13 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener,
         contentBinding.mapView.getMapAsync{
             presenter.doPopulateMap(it)
         }
-/** when the code below is uncommented the app errors out when trying to connect...
+
+
         val streetViewPanoramaFragment =
             supportFragmentManager
-                .findFragmentById(R.id.streetviewpanorama) as SupportStreetViewPanoramaFragment
+                .findFragmentById(R.id.streetview) as SupportStreetViewPanoramaFragment
         streetViewPanoramaFragment.getStreetViewPanoramaAsync(this)
-        */
+
     }
 
 
@@ -61,7 +62,7 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener,
     }
 
     override fun onStreetViewPanoramaReady(streetViewPanorama: StreetViewPanorama) {
-        val sanFrancisco = LatLng(37.754130, -122.447129)
+        val sanFrancisco = LatLng(0.0, 0.0)
         streetViewPanorama.setPosition(sanFrancisco)
         }
 
