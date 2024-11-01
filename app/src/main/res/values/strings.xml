@@ -24,4 +24,5 @@
     <string name="menu_saveHotel">Save</string>
     <string name="title_activity_hotels_maps">All Hotels </string>
     <string name="map_select_hotel">Select Hotel </string>
+    <string name="search_fragment">Search</string>
 </resources>
