@@ -4,16 +4,21 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback
+import com.google.android.gms.maps.StreetViewPanorama
+import com.google.android.gms.maps.SupportStreetViewPanoramaFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
+import org.wit.hotels.R
 import org.wit.hotels.databinding.ActivityHotelsOverviewMapBinding
 import org.wit.hotels.databinding.ContentHotelsOverviewMapBinding
 import org.wit.hotels.main.MainApp
 import org.wit.hotels.models.HotelModel
 import timber.log.Timber.i
 
-class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
+class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener,
+     OnStreetViewPanoramaReadyCallback {
 
     private lateinit var binding: ActivityHotelsOverviewMapBinding
     private lateinit var contentBinding: ContentHotelsOverviewMapBinding
@@ -36,7 +41,15 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
         contentBinding.mapView.getMapAsync{
             presenter.doPopulateMap(it)
         }
+/**
+        val streetViewPanoramaFragment =
+            supportFragmentManager
+                .findFragmentById(R.id.streetviewpanorama) as SupportStreetViewPanoramaFragment
+        streetViewPanoramaFragment.getStreetViewPanoramaAsync(this)
+        */
     }
+
+
     fun showHotel(hotel: HotelModel) {
         i("HotelsMapView showHotel started")
         contentBinding.currentName.text = hotel.name
@@ -46,6 +59,11 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
             .into(contentBinding.currentImage)
         presenter.hotelSelectZoom(hotel)
     }
+
+    override fun onStreetViewPanoramaReady(streetViewPanorama: StreetViewPanorama) {
+        val sanFrancisco = LatLng(37.754130, -122.447129)
+        streetViewPanorama.setPosition(sanFrancisco)
+        }
 
     override fun onMarkerClick(marker: Marker): Boolean {
         i("HotelsMapView onMarkerClick started")
