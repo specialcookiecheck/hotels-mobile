@@ -41,7 +41,7 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener,
         contentBinding.mapView.getMapAsync{
             presenter.doPopulateMap(it)
         }
-/**
+/** when the code below is uncommented the app errors out when trying to connect...
         val streetViewPanoramaFragment =
             supportFragmentManager
                 .findFragmentById(R.id.streetviewpanorama) as SupportStreetViewPanoramaFragment
