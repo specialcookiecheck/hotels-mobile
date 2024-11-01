@@ -18,9 +18,10 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/streetviewConstraint"
         android:layout_width="0dp"
         android:layout_height="125dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,7 +35,7 @@
             class="com.google.android.gms.maps.SupportStreetViewPanoramaFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

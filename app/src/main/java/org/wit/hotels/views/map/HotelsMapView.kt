@@ -1,6 +1,7 @@
 package org.wit.hotels.views.map
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,6 +25,7 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener,
     private lateinit var contentBinding: ContentHotelsOverviewMapBinding
     lateinit var app: MainApp
     lateinit var presenter: HotelsMapPresenter
+    lateinit var streetViewPanoramaSet: StreetViewPanorama
 
     override fun onCreate(savedInstanceState: Bundle?) {
         i("HotelsMapView onCreate started")
@@ -62,13 +64,20 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener,
     }
 
     override fun onStreetViewPanoramaReady(streetViewPanorama: StreetViewPanorama) {
-        val sanFrancisco = LatLng(0.0, 0.0)
-        streetViewPanorama.setPosition(sanFrancisco)
+        streetViewPanoramaSet = streetViewPanorama
         }
 
     override fun onMarkerClick(marker: Marker): Boolean {
         i("HotelsMapView onMarkerClick started")
         presenter.doMarkerSelected(marker)
+        val hotel = app.hotels.findById(marker.tag as Long)
+        val location = hotel?.let { LatLng(it.lat, hotel.lng) }
+        if (location != null) {
+            streetViewPanoramaSet.setPosition(location)
+        }
+        val streetViewConstraint: View = findViewById(R.id.streetviewConstraint)
+        streetViewConstraint.visibility = View.VISIBLE
+
         return true
     }
 
