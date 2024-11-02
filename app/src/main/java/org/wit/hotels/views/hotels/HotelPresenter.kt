@@ -38,14 +38,14 @@ class HotelPresenter(private val view: HotelView) {
 
     fun doAddOrSave(name: String, description: String, street: String, city: String, state: String, country: String, email: String, phone: String) {
         println("HotelPresenter doAddOrSave started")
-        hotel.name = name
-        hotel.description = description
-        hotel.street = street
-        hotel.city = city
-        hotel.state = state
-        hotel.country = country
-        hotel.email = email
-        hotel.phone = phone
+        hotel.hotelName = name
+        hotel.hotelDescription = description
+        hotel.hotelStreet = street
+        hotel.hotelCity = city
+        hotel.hotelState = state
+        hotel.hotelCountry = country
+        hotel.hotelEmail = email
+        hotel.hotelPhone = phone
 
         if (edit) {
             app.hotels.update(hotel)
@@ -79,10 +79,10 @@ class HotelPresenter(private val view: HotelView) {
     fun doSetLocation() {
         println("HotelPresenter doSetLocation started")
         val location = LocationModel(54.0, -6.4, 6f)
-        if (hotel.zoom != 0f) {
-            location.lat =  hotel.lat
-            location.lng = hotel.lng
-            location.zoom = hotel.zoom
+        if (hotel.hotelZoomLevel != 0f) {
+            location.lat =  hotel.hotelLatitude
+            location.lng = hotel.hotelLongitude
+            location.zoom = hotel.hotelZoomLevel
         }
         val launcherIntent = Intent(view, EditLocationView::class.java)
             .putExtra("hotel", hotel)
@@ -92,14 +92,14 @@ class HotelPresenter(private val view: HotelView) {
 
     fun cacheHotels (name: String, description: String, street: String, city: String, state: String, country: String, email: String, phone: String) {
         println("HotelPresenter cacheHotels started")
-        hotel.name = name
-        hotel.description = description
-        hotel.street = street
-        hotel.city = city
-        hotel.state = state
-        hotel.country = country
-        hotel.email = email
-        hotel.phone = phone
+        hotel.hotelName = name
+        hotel.hotelDescription = description
+        hotel.hotelStreet = street
+        hotel.hotelCity = city
+        hotel.hotelState = state
+        hotel.hotelCountry = country
+        hotel.hotelEmail = email
+        hotel.hotelPhone = phone
     }
     
     private fun registerImagePickerCallback() {
@@ -112,9 +112,9 @@ class HotelPresenter(private val view: HotelView) {
                 view.contentResolver
                     .takePersistableUriPermission(it!!,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION )
-                hotel.image = it // The returned Uri
-                Timber.i("IMG :: ${hotel.image}")
-                view.updateImage(hotel.image)
+                hotel.hotelImage = it // The returned Uri
+                Timber.i("IMG :: ${hotel.hotelImage}")
+                view.updateImage(hotel.hotelImage)
             }
             catch(e:Exception){
                 e.printStackTrace()
@@ -136,9 +136,9 @@ class HotelPresenter(private val view: HotelView) {
                             //val location = result.data!!.extras?.getParcelable("location",Location::class.java)!!
                             val location = result.data!!.extras?.getParcelable<LocationModel>("location")!!
                             Timber.i("Location == $location")
-                            hotel.lat = location.lat
-                            hotel.lng = location.lng
-                            hotel.zoom = location.zoom
+                            hotel.hotelLatitude = location.lat
+                            hotel.hotelLongitude = location.lng
+                            hotel.hotelZoomLevel = location.zoom
                         }
                     }
                     AppCompatActivity.RESULT_CANCELED -> { } else -> { }

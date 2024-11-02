@@ -3,7 +3,6 @@ package org.wit.hotels.views.map
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback
 import com.google.android.gms.maps.StreetViewPanorama
@@ -55,10 +54,10 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener,
 
     fun showHotel(hotel: HotelModel) {
         i("HotelsMapView showHotel started")
-        contentBinding.currentName.text = hotel.name
-        contentBinding.currentDescription.text = hotel.description
+        contentBinding.currentName.text = hotel.hotelName
+        contentBinding.currentDescription.text = hotel.hotelDescription
         Picasso.get()
-            .load(hotel.image)
+            .load(hotel.hotelImage)
             .into(contentBinding.currentImage)
         presenter.hotelSelectZoom(hotel)
     }
@@ -71,7 +70,7 @@ class HotelsMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener,
         i("HotelsMapView onMarkerClick started")
         presenter.doMarkerSelected(marker)
         val hotel = app.hotels.findById(marker.tag as Long)
-        val location = hotel?.let { LatLng(it.lat, hotel.lng) }
+        val location = hotel?.let { LatLng(it.hotelLatitude, hotel.hotelLongitude) }
         if (location != null) {
             streetViewPanoramaSet.setPosition(location)
         }

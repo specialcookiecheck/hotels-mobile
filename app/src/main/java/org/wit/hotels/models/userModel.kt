@@ -3,6 +3,7 @@ package org.wit.hotels.models
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+/**
 @Parcelize
 data class UserModel(var id: Long = 0,
                       var firstName: String = "",
@@ -10,3 +11,4 @@ data class UserModel(var id: Long = 0,
                       var email: String = "",
                       var phone: String = "",
                       var dateOfBirth: String = "") : Parcelable
+*/

@@ -17,31 +17,31 @@ class HotelMemStore : HotelStore {
     }
 
     override fun findById(id:Long) : HotelModel? {
-        val foundHotels: HotelModel? = hotels.find { it.id == id }
+        val foundHotels: HotelModel? = hotels.find { it.hotelId == id }
         return foundHotels
     }
 
     override fun create(hotel: HotelModel) {
-        hotel.id = getId()
+        hotel.hotelId = getId()
         hotels.add(hotel)
         logAll()
     }
 
     override fun update(hotel: HotelModel) {
-        val foundHotels: HotelModel? = hotels.find { p -> p.id == hotel.id }
+        val foundHotels: HotelModel? = hotels.find { p -> p.hotelId == hotel.hotelId }
         if (foundHotels != null) {
-            foundHotels.name = hotel.name
-            foundHotels.description = hotel.description
-            foundHotels.street = hotel.street
-            foundHotels.city = hotel.city
-            foundHotels.state = hotel.state
-            foundHotels.country = hotel.country
-            foundHotels.email = hotel.email
-            foundHotels.phone = hotel.phone
-            foundHotels.image = hotel.image
-            foundHotels.lat = hotel.lat
-            foundHotels.lng = hotel.lng
-            foundHotels.zoom = hotel.zoom
+            foundHotels.hotelName = hotel.hotelName
+            foundHotels.hotelDescription = hotel.hotelDescription
+            foundHotels.hotelStreet = hotel.hotelStreet
+            foundHotels.hotelCity = hotel.hotelCity
+            foundHotels.hotelState = hotel.hotelState
+            foundHotels.hotelCountry = hotel.hotelCountry
+            foundHotels.hotelEmail = hotel.hotelEmail
+            foundHotels.hotelPhone = hotel.hotelPhone
+            foundHotels.hotelImage = hotel.hotelImage
+            foundHotels.hotelLatitude = hotel.hotelLatitude
+            foundHotels.hotelLongitude = hotel.hotelLongitude
+            foundHotels.hotelZoomLevel = hotel.hotelZoomLevel
             logAll()
         }
     }

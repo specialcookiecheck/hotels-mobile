@@ -33,9 +33,9 @@ class HotelAdapter constructor(private var hotels: List<HotelModel>,
             RecyclerView.ViewHolder(binding.root) {
 
         fun bind(hotel: HotelModel, listener: HotelListener) {
-            binding.hotelName.text = hotel.name
-            binding.hotelDescription.text = hotel.description
-            Picasso.get().load(hotel.image).resize(200,200).into(binding.imageIcon)
+            binding.hotelName.text = hotel.hotelName
+            binding.hotelDescription.text = hotel.hotelDescription
+            Picasso.get().load(hotel.hotelImage).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onHotelClick(hotel,adapterPosition) }
         }
     }

@@ -1,5 +1,6 @@
 package org.wit.users.models
 
+import org.wit.hotels.models.HotelModel
 import org.wit.hotels.models.UserModel
 import org.wit.hotels.models.UserStore
 import timber.log.Timber.i
@@ -21,26 +22,26 @@ class UserMemStore : UserStore {
 
     override fun findById(id:Long) : UserModel? {
         i("UserMemStore findById started")
-        val foundUsers: UserModel? = users.find { it.id == id }
+        val foundUsers: UserModel? = users.find { it.userId == id }
         return foundUsers
     }
 
     override fun create(user: UserModel) {
         i("UserMemStore create started")
-        user.id = getId()
+        user.userId = getId()
         users.add(user)
         logAll()
     }
 
     override fun update(user: UserModel) {
         i("UserMemStore update started")
-        val foundUsers: UserModel? = users.find { p -> p.id == user.id }
+        val foundUsers: UserModel? = users.find { p -> p.userId == user.userId }
         if (foundUsers != null) {
-            foundUsers.firstName = user.firstName
-            foundUsers.lastName = user.lastName
-            foundUsers.email = user.email
-            foundUsers.phone = user.phone
-            foundUsers.dateOfBirth = user.dateOfBirth
+            foundUsers.userFirstName = user.userFirstName
+            foundUsers.userLastName = user.userLastName
+            foundUsers.userEmail = user.userEmail
+            foundUsers.userPhone = user.userPhone
+            foundUsers.userDateOfBirth = user.userDateOfBirth
             logAll()
         }
     }

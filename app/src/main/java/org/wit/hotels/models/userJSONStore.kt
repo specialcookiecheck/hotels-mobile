@@ -10,8 +10,6 @@ import timber.log.Timber.i
 import java.lang.reflect.Type
 import java.util.*
 
-const val USERS_JSON_FILE = "users.json"
-
 class UserJSONStore(private val context: Context) : UserStore {
 
     private var users = mutableListOf<UserModel>()
@@ -19,7 +17,7 @@ class UserJSONStore(private val context: Context) : UserStore {
 
     init {
         i("UserJSONStore init started")
-        if (exists(context, USERS_JSON_FILE)) {
+        if (exists(context, JSON_FILE)) {
             deserialize()
         }
         i("printing users")
@@ -35,13 +33,13 @@ class UserJSONStore(private val context: Context) : UserStore {
 
     override fun findById(id:Long) : UserModel? {
         i("UserJSONStore findById started")
-        val foundUsers: UserModel? = users.find { it.id == id }
+        val foundUsers: UserModel? = users.find { it.userId == id }
         return foundUsers
     }
 
     override fun create(user: UserModel) {
         i("UserJSONStore create started")
-        user.id = generateRandomId()
+        user.userId = generateRandomId()
         users.add(user)
         serialize()
     }
@@ -49,13 +47,13 @@ class UserJSONStore(private val context: Context) : UserStore {
     override fun update(user: UserModel) {
         i("UserJSONStore update started")
         val usersList = findAll() as ArrayList<UserModel>
-        var foundUsers: UserModel? = usersList.find { p -> p.id == user.id }
+        var foundUsers: UserModel? = usersList.find { p -> p.userId == user.userId }
         if (foundUsers != null) {
-            foundUsers.firstName = user.firstName
-            foundUsers.lastName = user.lastName
-            foundUsers.email = user.email
-            foundUsers.phone = user.phone
-            foundUsers.dateOfBirth = user.dateOfBirth
+            foundUsers.userFirstName = user.userFirstName
+            foundUsers.userLastName = user.userLastName
+            foundUsers.userEmail = user.userEmail
+            foundUsers.userPhone = user.userPhone
+            foundUsers.userDateOfBirth = user.userDateOfBirth
         }
         serialize()
     }
@@ -63,12 +61,12 @@ class UserJSONStore(private val context: Context) : UserStore {
     private fun serialize() {
         i("UserJSONStore serialize started")
         val jsonString = gsonBuilder.toJson(users, listType)
-        write(context, USERS_JSON_FILE, jsonString)
+        write(context, JSON_FILE, jsonString)
     }
 
     private fun deserialize() {
         i("UserJSONStore deserialize started")
-        val jsonString = read(context, USERS_JSON_FILE)
+        val jsonString = read(context, JSON_FILE)
         users = gsonBuilder.fromJson(jsonString, listType)
     }
 

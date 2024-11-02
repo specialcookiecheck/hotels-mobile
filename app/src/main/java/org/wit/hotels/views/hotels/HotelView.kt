@@ -112,20 +112,20 @@ class HotelView : AppCompatActivity(), OnMapReadyCallback {
         i("HotelView showHotel started")
         hotelInit = hotel
 
-        binding.hotelName.setText(hotel.name)
-        binding.hotelDescription.setText(hotel.description)
-        binding.hotelStreet.setText(hotel.street)
-        binding.hotelCity.setText(hotel.city)
-        binding.hotelState.setText(hotel.state)
-        binding.hotelCountry.setText(hotel.country)
-        binding.hotelEmail.setText(hotel.email)
-        binding.hotelPhone.setText(hotel.phone)
-        val hotelCoordinatesText = "${hotel.lat}, ${hotel.lng}"
+        binding.hotelName.setText(hotel.hotelName)
+        binding.hotelDescription.setText(hotel.hotelDescription)
+        binding.hotelStreet.setText(hotel.hotelStreet)
+        binding.hotelCity.setText(hotel.hotelCity)
+        binding.hotelState.setText(hotel.hotelState)
+        binding.hotelCountry.setText(hotel.hotelCountry)
+        binding.hotelEmail.setText(hotel.hotelEmail)
+        binding.hotelPhone.setText(hotel.hotelPhone)
+        val hotelCoordinatesText = "${hotel.hotelLatitude}, ${hotel.hotelLongitude}"
         binding.hotelCoordinates.text = hotelCoordinatesText
         Picasso.get()
-            .load(hotel.image)
+            .load(hotel.hotelImage)
             .into(binding.hotelImage)
-        if (hotel.image != Uri.EMPTY) {
+        if (hotel.hotelImage != Uri.EMPTY) {
             binding.addHotelImage.setText(R.string.change_hotel_image)
         }
 
@@ -143,13 +143,13 @@ class HotelView : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         i("HotelView onMapReady started")
         i(hotelInit.toString())
-        i(hotelInit.name)
-        val loc = LatLng(hotelInit.lat, hotelInit.lng)
+        i(hotelInit.hotelName)
+        val loc = LatLng(hotelInit.hotelLatitude, hotelInit.hotelLongitude)
         googleMap.addMarker(
             MarkerOptions()
                 .position(loc)
-                .title(hotelInit.name)
+                .title(hotelInit.hotelName)
         )
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, hotelInit.zoom))
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, hotelInit.hotelZoomLevel))
     }
 }

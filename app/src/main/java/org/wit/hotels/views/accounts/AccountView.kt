@@ -75,13 +75,13 @@ class AccountView : AppCompatActivity() {
     
 
     fun showUser(user: UserModel) {
-        i("AccountView showHotel started")
-        i(user.firstName)
+        i("AccountView showUser started")
+        i(user.userFirstName)
 
-        binding.accountEditFirstName.setText(user.firstName)
-        binding.accountEditLastName.setText(user.lastName)
-        binding.accountEditEmail.setText(user.email)
-        binding.accountEditPhone.setText(user.phone)
-        binding.accountEditDateOfBirth.setText(user.dateOfBirth)
+        binding.accountEditFirstName.setText(user.userFirstName)
+        binding.accountEditLastName.setText(user.userLastName)
+        binding.accountEditEmail.setText(user.userEmail)
+        binding.accountEditPhone.setText(user.userPhone)
+        binding.accountEditDateOfBirth.setText(user.userDateOfBirth)
     }
 }

@@ -14,7 +14,7 @@ import kotlin.math.round
 
 class EditLocationPresenter (val view: EditLocationView) {
 
-    var location = LocationModel()
+    private var location = LocationModel()
     //val location = LocationModel(54.0, -6.4, 6f)
     var hotel = HotelModel()
 
@@ -31,14 +31,14 @@ class EditLocationPresenter (val view: EditLocationView) {
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         map.uiSettings.isZoomControlsEnabled = true
         map.uiSettings.isCompassEnabled = true
-        location.lat = hotel.lat
-        location.lng = hotel.lng
-        val lat = round(hotel.lat *100) /100
-        val lng = round(hotel.lng *100) /100
+        location.lat = hotel.hotelLatitude
+        location.lng = hotel.hotelLongitude
+        val lat = round(hotel.hotelLatitude *100) /100
+        val lng = round(hotel.hotelLongitude *100) /100
         val loc = LatLng(location.lat, location.lng)
         val options = MarkerOptions()
-            .title(hotel.name + " - ($lat, $lng)")
-            .snippet(hotel.description)
+            .title(hotel.hotelName + " - ($lat, $lng)")
+            .snippet(hotel.hotelDescription)
             .draggable(true)
             .position(loc)
         map.addMarker(options)
@@ -64,11 +64,11 @@ class EditLocationPresenter (val view: EditLocationView) {
 
     fun doUpdateMarker(marker: Marker) {
         i("EditLocationPresenter doUpdateMarker started")
-        val description = hotel.description
+        val description = hotel.hotelDescription
         val loc = LatLng(location.lat, location.lng)
         val lat = round(location.lat *100) /100
         val lng = round(location.lng *100) /100
         marker.snippet = description
-        marker.title = hotel.name + " - ($lat, $lng)"
+        marker.title = hotel.hotelName + " - ($lat, $lng)"
     }
 }

@@ -11,7 +11,6 @@ import org.wit.hotels.adapters.HotelListener
 import org.wit.hotels.databinding.ActivityHotelsListBinding
 import org.wit.hotels.main.MainApp
 import org.wit.hotels.models.HotelModel
-import org.wit.hotels.models.UserModel
 import timber.log.Timber.i
 
 class HotelsListView : AppCompatActivity(), HotelListener {

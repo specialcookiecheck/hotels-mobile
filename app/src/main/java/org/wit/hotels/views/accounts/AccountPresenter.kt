@@ -25,13 +25,13 @@ class AccountPresenter(private val view: AccountView) {
 
     fun doAddOrSave(firstName: String, lastName: String, email: String, phone: String, dateOfBirth: String) {
         println("AccountPresenter doAddOrSave started")
-        user.firstName = firstName
-        user.lastName = lastName
-        user.email = email
-        user.phone = phone
-        user.dateOfBirth = dateOfBirth
+        user.userFirstName = firstName
+        user.userLastName = lastName
+        user.userEmail = email
+        user.userPhone = phone
+        user.userDateOfBirth = dateOfBirth
 
-        i(user.firstName)
+        i(user.userFirstName)
         if (edit) {
             i("existing user, attempting database update")
             app.users.update(user)

@@ -10,12 +10,9 @@ import com.google.gson.JsonElement
 import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
-import com.google.gson.reflect.TypeToken
-import org.wit.hotels.models.HotelModel
 import timber.log.Timber.e
 import java.io.*
 import java.lang.reflect.Type
-import java.util.ArrayList
 import java.util.Random
 
 fun write(context: Context, fileName: String, data: String) {
@@ -75,6 +72,8 @@ class UriParser : JsonDeserializer<Uri>, JsonSerializer<Uri> {
         return JsonPrimitive(src.toString())
     }
 }
+
+const val JSON_FILE = "hotels.json"
 
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())

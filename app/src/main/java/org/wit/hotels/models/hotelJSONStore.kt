@@ -10,7 +10,6 @@ import timber.log.Timber.i
 import java.lang.reflect.Type
 import java.util.*
 
-const val HOTELS_JSON_FILE = "hotels.json"
 
 class HotelJSONStore(private val context: Context) : HotelStore {
 
@@ -19,7 +18,7 @@ class HotelJSONStore(private val context: Context) : HotelStore {
 
     init {
         i("HotelJSONStore init started")
-        if (exists(context, HOTELS_JSON_FILE)) {
+        if (exists(context, JSON_FILE)) {
             deserialize()
         }
         i("printing hotels")
@@ -34,13 +33,13 @@ class HotelJSONStore(private val context: Context) : HotelStore {
 
     override fun findById(id:Long) : HotelModel? {
         i("HotelJSONStore findById started")
-        val foundHotels: HotelModel? = hotels.find { it.id == id }
+        val foundHotels: HotelModel? = hotels.find { it.hotelId == id }
         return foundHotels
     }
 
     override fun create(hotel: HotelModel) {
         i("HotelJSONStore create started")
-        hotel.id = generateRandomId()
+        hotel.hotelId = generateRandomId()
         hotels.add(hotel)
         serialize()
     }
@@ -48,20 +47,20 @@ class HotelJSONStore(private val context: Context) : HotelStore {
     override fun update(hotel: HotelModel) {
         i("HotelJSONStore update started")
         val hotelsList = findAll() as ArrayList<HotelModel>
-        var foundHotels: HotelModel? = hotelsList.find { p -> p.id == hotel.id }
+        var foundHotels: HotelModel? = hotelsList.find { p -> p.hotelId == hotel.hotelId }
         if (foundHotels != null) {
-            foundHotels.name = hotel.name
-            foundHotels.description = hotel.description
-            foundHotels.street = hotel.street
-            foundHotels.city = hotel.city
-            foundHotels.state = hotel.state
-            foundHotels.country = hotel.country
-            foundHotels.email = hotel.email
-            foundHotels.phone = hotel.phone
-            foundHotels.image = hotel.image
-            foundHotels.lat = hotel.lat
-            foundHotels.lng = hotel.lng
-            foundHotels.zoom = hotel.zoom
+            foundHotels.hotelName = hotel.hotelName
+            foundHotels.hotelDescription = hotel.hotelDescription
+            foundHotels.hotelStreet = hotel.hotelStreet
+            foundHotels.hotelCity = hotel.hotelCity
+            foundHotels.hotelState = hotel.hotelState
+            foundHotels.hotelCountry = hotel.hotelCountry
+            foundHotels.hotelEmail = hotel.hotelEmail
+            foundHotels.hotelPhone = hotel.hotelPhone
+            foundHotels.hotelImage = hotel.hotelImage
+            foundHotels.hotelLatitude = hotel.hotelLatitude
+            foundHotels.hotelLongitude = hotel.hotelLongitude
+            foundHotels.hotelZoomLevel = hotel.hotelZoomLevel
         }
         serialize()
     }
@@ -69,12 +68,12 @@ class HotelJSONStore(private val context: Context) : HotelStore {
     private fun serialize() {
         i("HotelJSONStore serialize started")
         val jsonString = gsonBuilder.toJson(hotels, listType)
-        write(context, HOTELS_JSON_FILE, jsonString)
+        write(context, JSON_FILE, jsonString)
     }
 
     private fun deserialize() {
         i("HotelJSONStore deserialize started")
-        val jsonString = read(context, HOTELS_JSON_FILE)
+        val jsonString = read(context, JSON_FILE)
         hotels = gsonBuilder.fromJson(jsonString, listType)
     }
 

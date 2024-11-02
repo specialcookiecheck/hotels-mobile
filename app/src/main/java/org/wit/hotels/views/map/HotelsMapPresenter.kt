@@ -30,9 +30,9 @@ class HotelsMapPresenter(val view: HotelsMapView) {
         // UiSettings.setZoomControlsEnabled(true)
         map.setOnMarkerClickListener(view)
         app.hotels.findAll().forEach {
-            val loc = LatLng(it.lat, it.lng)
-            val options = MarkerOptions().title(it.name).position(loc)
-            map.addMarker(options)?.tag = it.id
+            val loc = LatLng(it.hotelLatitude, it.hotelLongitude)
+            val options = MarkerOptions().title(it.hotelName).position(loc)
+            map.addMarker(options)?.tag = it.hotelId
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 6f))
         }
     }
@@ -46,8 +46,8 @@ class HotelsMapPresenter(val view: HotelsMapView) {
 
     fun hotelSelectZoom(hotel: HotelModel) {
         i("HotelsMapPresenter hotelSelectZoom started")
-        i("hotelZoom: " +hotel.zoom)
-        val loc = LatLng(hotel.lat, hotel.lng)
-        mapInit.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, hotel.zoom))
+        i("hotelZoom: " +hotel.hotelZoomLevel)
+        val loc = LatLng(hotel.hotelLatitude, hotel.hotelLongitude)
+        mapInit.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, hotel.hotelZoomLevel))
     }
 }
