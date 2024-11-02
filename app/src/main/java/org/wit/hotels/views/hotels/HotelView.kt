@@ -80,7 +80,10 @@ class HotelView : AppCompatActivity(), OnMapReadyCallback {
         when (item.itemId) {
             R.id.hotel_save -> {
                 if (binding.hotelName.text.toString().isEmpty()) {
-                    Snackbar.make(binding.root, R.string.enter_hotels_title, Snackbar.LENGTH_LONG)
+                    Snackbar.make(binding.root, R.string.enter_hotel_name, Snackbar.LENGTH_LONG)
+                        .show()
+                } else if (binding.hotelCoordinates.text.toString().isEmpty()) {
+                    Snackbar.make(binding.root, R.string.enter_hotel_coordinates, Snackbar.LENGTH_LONG)
                         .show()
                 } else {
                     presenter.doAddOrSave(

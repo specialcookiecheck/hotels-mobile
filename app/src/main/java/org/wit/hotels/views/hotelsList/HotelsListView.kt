@@ -11,6 +11,7 @@ import org.wit.hotels.adapters.HotelListener
 import org.wit.hotels.databinding.ActivityHotelsListBinding
 import org.wit.hotels.main.MainApp
 import org.wit.hotels.models.HotelModel
+import org.wit.hotels.models.UserModel
 import timber.log.Timber.i
 
 class HotelsListView : AppCompatActivity(), HotelListener {
@@ -44,8 +45,9 @@ class HotelsListView : AppCompatActivity(), HotelListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         i("HotelsListView onOptionsItemSelected started")
         when (item.itemId) {
-            R.id.hotel_add -> { presenter.doAddHotels() }
+            R.id.hotel_add -> { presenter.doAddHotel() }
             R.id.hotel_map -> { presenter.doShowHotelsMap() }
+            R.id.account -> { presenter.doEditAccount() }
         }
         return super.onOptionsItemSelected(item)
     }

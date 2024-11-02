@@ -9,4 +9,4 @@ data class UserModel(var id: Long = 0,
                       var lastName: String = "",
                       var email: String = "",
                       var phone: String = "",
-                      var age: Int = 0) : Parcelable
+                      var dateOfBirth: String = "") : Parcelable

@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hotels"
         tools:targetApi="34">
+        <activity
+            android:name=".views.accounts.AccountView"
+            android:label="@string/title_activity_account"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
