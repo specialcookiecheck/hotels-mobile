@@ -13,4 +13,10 @@
         android:icon="@drawable/map_foreground"
         android:title="@string/menu_openHotelsMap"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/baseline_manage_accounts_24"
+        android:title="@string/menu_openAccount"
+        app:showAsAction="always"/>
 </menu>

@@ -12,6 +12,7 @@
     <string name="placeholder_hotelCoordinates">Set location to set Latitude, Longitude </string>
     <string name="menu_addHotels">Add</string>
     <string name="menu_openHotelsMap">Open Map</string>
+    <string name="menu_openAccount">Open Account</string>
     <string name="menu_cancelHotels">Cancel</string>
     <string name="enter_hotels_title"> Please enter the Hotel Name </string>
     <string name="save_hotel"> Save Hotel </string>
