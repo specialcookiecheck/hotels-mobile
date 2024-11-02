@@ -8,7 +8,7 @@ internal fun getId(): Long {
     return lastId++
 }
 
-class HotelsMemStore : HotelsStore {
+class HotelMemStore : HotelStore {
 
     val hotels = ArrayList<HotelModel>()
 
