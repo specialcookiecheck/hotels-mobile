@@ -20,38 +20,38 @@ fun generateRandomId(): Long {
     return Random().nextLong()
 }
 
-class HotelsJSONStore(private val context: Context) : HotelsStore {
+class HotelJSONStore(private val context: Context) : HotelStore {
 
     var hotels = mutableListOf<HotelModel>()
 
     init {
-        i("HotelsJSONStore init started")
+        i("HotelJSONStore init started")
         if (exists(context, JSON_FILE)) {
             deserialize()
         }
     }
 
     override fun findAll(): MutableList<HotelModel> {
-        i("HotelsJSONStore findAll started")
+        i("HotelJSONStore findAll started")
         logAll()
         return hotels
     }
 
     override fun findById(id:Long) : HotelModel? {
-        i("HotelsJSONStore findById started")
+        i("HotelJSONStore findById started")
         val foundHotels: HotelModel? = hotels.find { it.id == id }
         return foundHotels
     }
 
     override fun create(hotel: HotelModel) {
-        i("HotelsJSONStore create started")
+        i("HotelJSONStore create started")
         hotel.id = generateRandomId()
         hotels.add(hotel)
         serialize()
     }
 
     override fun update(hotel: HotelModel) {
-        i("HotelsJSONStore update started")
+        i("HotelJSONStore update started")
         val hotelsList = findAll() as ArrayList<HotelModel>
         var foundHotels: HotelModel? = hotelsList.find { p -> p.id == hotel.id }
         if (foundHotels != null) {
@@ -72,25 +72,25 @@ class HotelsJSONStore(private val context: Context) : HotelsStore {
     }
 
     private fun serialize() {
-        i("HotelsJSONStore serialize started")
+        i("HotelJSONStore serialize started")
         val jsonString = gsonBuilder.toJson(hotels, listType)
         write(context, JSON_FILE, jsonString)
     }
 
     private fun deserialize() {
-        i("HotelsJSONStore deserialize started")
+        i("HotelJSONStore deserialize started")
         val jsonString = read(context, JSON_FILE)
         hotels = gsonBuilder.fromJson(jsonString, listType)
     }
 
     override fun delete(hotel: HotelModel) {
-        i("HotelsJSONStore delete started")
+        i("HotelJSONStore delete started")
         hotels.remove(hotel)
         serialize()
     }
 
     private fun logAll() {
-        i("HotelsJSONStore logAll started")
+        i("HotelJSONStore logAll started")
         hotels.forEach { Timber.i("$it") }
     }
 }
