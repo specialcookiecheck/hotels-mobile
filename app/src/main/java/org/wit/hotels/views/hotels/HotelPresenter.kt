@@ -57,6 +57,7 @@ class HotelPresenter(private val view: HotelView) {
     }
 
     fun doCancel() {
+        println("HotelPresenter doCancel started")
         view.finish()
     }
 
