@@ -1,8 +1,22 @@
 package org.wit.hotels.helpers
 
 import android.content.Context
+import android.net.Uri
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
+import com.google.gson.JsonPrimitive
+import com.google.gson.JsonSerializationContext
+import com.google.gson.JsonSerializer
+import com.google.gson.reflect.TypeToken
+import org.wit.hotels.models.HotelModel
 import timber.log.Timber.e
 import java.io.*
+import java.lang.reflect.Type
+import java.util.ArrayList
+import java.util.Random
 
 fun write(context: Context, fileName: String, data: String) {
     try {
@@ -42,4 +56,31 @@ fun read(context: Context, fileName: String): String {
 fun exists(context: Context, filename: String): Boolean {
     val file = context.getFileStreamPath(filename)
     return file.exists()
+}
+
+class UriParser : JsonDeserializer<Uri>, JsonSerializer<Uri> {
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type?,
+        context: JsonDeserializationContext?
+    ): Uri {
+        return Uri.parse(json?.asString)
+    }
+
+    override fun serialize(
+        src: Uri?,
+        typeOfSrc: Type?,
+        context: JsonSerializationContext?
+    ): JsonElement {
+        return JsonPrimitive(src.toString())
+    }
+}
+
+val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
+    .registerTypeAdapter(Uri::class.java, UriParser())
+    .create()
+
+
+fun generateRandomId(): Long {
+    return Random().nextLong()
 }

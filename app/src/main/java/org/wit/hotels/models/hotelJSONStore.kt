@@ -10,25 +10,20 @@ import timber.log.Timber.i
 import java.lang.reflect.Type
 import java.util.*
 
-const val JSON_FILE = "hotels.json"
-val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
-    .registerTypeAdapter(Uri::class.java, UriParser())
-    .create()
-val listType: Type = object : TypeToken<ArrayList<HotelModel>>() {}.type
-
-fun generateRandomId(): Long {
-    return Random().nextLong()
-}
+const val HOTELS_JSON_FILE = "hotels.json"
 
 class HotelJSONStore(private val context: Context) : HotelStore {
 
-    var hotels = mutableListOf<HotelModel>()
+    private var hotels = mutableListOf<HotelModel>()
+    private val listType: Type = object : TypeToken<ArrayList<HotelModel>>() {}.type
 
     init {
         i("HotelJSONStore init started")
-        if (exists(context, JSON_FILE)) {
+        if (exists(context, HOTELS_JSON_FILE)) {
             deserialize()
         }
+        i("printing hotels")
+        i(hotels.toString())
     }
 
     override fun findAll(): MutableList<HotelModel> {
@@ -74,12 +69,12 @@ class HotelJSONStore(private val context: Context) : HotelStore {
     private fun serialize() {
         i("HotelJSONStore serialize started")
         val jsonString = gsonBuilder.toJson(hotels, listType)
-        write(context, JSON_FILE, jsonString)
+        write(context, HOTELS_JSON_FILE, jsonString)
     }
 
     private fun deserialize() {
         i("HotelJSONStore deserialize started")
-        val jsonString = read(context, JSON_FILE)
+        val jsonString = read(context, HOTELS_JSON_FILE)
         hotels = gsonBuilder.fromJson(jsonString, listType)
     }
 
@@ -95,20 +90,3 @@ class HotelJSONStore(private val context: Context) : HotelStore {
     }
 }
 
-class UriParser : JsonDeserializer<Uri>,JsonSerializer<Uri> {
-    override fun deserialize(
-        json: JsonElement?,
-        typeOfT: Type?,
-        context: JsonDeserializationContext?
-    ): Uri {
-        return Uri.parse(json?.asString)
-    }
-
-    override fun serialize(
-        src: Uri?,
-        typeOfSrc: Type?,
-        context: JsonSerializationContext?
-    ): JsonElement {
-        return JsonPrimitive(src.toString())
-    }
-}
