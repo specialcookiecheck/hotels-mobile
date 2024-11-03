@@ -48,6 +48,7 @@ class HotelsListView : AppCompatActivity(), HotelListener {
             R.id.hotel_add -> { presenter.doAddHotel() }
             R.id.hotel_map -> { presenter.doShowHotelsMap() }
             R.id.account -> { presenter.doEditAccount() }
+            R.id.view_gallery -> { presenter.doViewGallery() }
         }
         return super.onOptionsItemSelected(item)
     }
