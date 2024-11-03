@@ -8,7 +8,7 @@ import org.wit.hotels.views.accounts.AccountView
 import org.wit.hotels.views.hotels.HotelView
 import org.wit.hotels.main.MainApp
 import org.wit.hotels.models.HotelModel
-import org.wit.hotels.models.UserModel
+import org.wit.hotels.views.gallery.GalleryView
 import org.wit.hotels.views.map.HotelsMapView
 import timber.log.Timber.i
 
@@ -39,6 +39,12 @@ class HotelsListPresenter(val view: HotelsListView) {
         val launcherIntent = Intent(view, HotelView::class.java)
         launcherIntent.putExtra("hotel_edit", hotel)
         position = pos
+        refreshIntentLauncher.launch(launcherIntent)
+    }
+
+    fun doViewGallery() {
+        i("HotelsListPresenter doViewGallery started")
+        val launcherIntent = Intent(view, GalleryView::class.java)
         refreshIntentLauncher.launch(launcherIntent)
     }
 

@@ -21,9 +21,12 @@
     <string name="change_hotel_image">Change image</string>
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_gallery">Gallery</string>
+    <string name="title_add_hotel">Add Hotel</string>
+    <string name="title_activity_hotels_maps">All Hotels </string>
+    <string name="title_activity_account">Account</string>
     <string name="menu_deleteHotel">Delete</string>
     <string name="menu_saveHotel">Save</string>
-    <string name="title_activity_hotels_maps">All Hotels </string>
     <string name="map_select_hotel">Select Hotel </string>
     <string name="search_fragment">Search</string>
     <string name="accountText">Hi friend, these are your account details</string>
@@ -32,11 +35,11 @@
     <string name="hint_accountEmail">Enter your email address</string>
     <string name="hint_accountPhone">Enter your phone number</string>
     <string name="hint_accountDateOfBirth">What is your date of birth?</string>
-    <string name="title_activity_account">Account</string>
     <string name="enter_user_lastName">Please enter your last name</string>
     <string name="enter_user_firstName">Please enter your first name</string>
     <string name="enter_user_email">Please enter your email</string>
     <string name="enter_user_phone">Please enter your phone number</string>
     <string name="enter_user_dateOfBirth">Please enter your date of birth</string>
     <string name="enter_hotel_coordinates">Please set a location</string>
+    <string name="menu_viewGallery">View Gallery</string>
 </resources>

@@ -15,6 +15,12 @@
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/view_gallery"
+        android:icon="@drawable/baseline_photo_library_24"
+        android:title="@string/menu_viewGallery"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/account"
         android:icon="@drawable/baseline_manage_accounts_24"
         android:title="@string/menu_openAccount"
