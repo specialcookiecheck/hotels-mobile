@@ -11,21 +11,25 @@ import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
 import timber.log.Timber.e
+import timber.log.Timber.i
 import java.io.*
 import java.lang.reflect.Type
 import java.util.Random
 
 fun write(context: Context, fileName: String, data: String) {
+    i("FileHelpers write started")
     try {
         val outputStreamWriter = OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE))
         outputStreamWriter.write(data)
         outputStreamWriter.close()
+        i("FileHelpers write completed")
     } catch (e: Exception) {
         e("Cannot read file: %s", e.toString())
     }
 }
 
 fun read(context: Context, fileName: String): String {
+    i("FileHelpers read started")
     var str = ""
     try {
         val inputStream = context.openFileInput(fileName)
@@ -51,6 +55,7 @@ fun read(context: Context, fileName: String): String {
 }
 
 fun exists(context: Context, filename: String): Boolean {
+    i("FileHelpers exists started")
     val file = context.getFileStreamPath(filename)
     return file.exists()
 }
@@ -81,5 +86,6 @@ val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
 
 
 fun generateRandomId(): Long {
+    i("FileHelpers generateRandomId started")
     return Random().nextLong()
 }

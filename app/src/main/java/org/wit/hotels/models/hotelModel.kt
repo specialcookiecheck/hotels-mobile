@@ -4,6 +4,8 @@ import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+
+
 @Parcelize
 data class HotelModel(var hotelId: Long = 0,
                       var hotelName: String = "",
@@ -24,10 +26,3 @@ data class LocationModel(var lat: Double = 0.0,
                          var lng: Double = 0.0,
                          var zoom: Float = 0f) : Parcelable
 
-@Parcelize
-data class UserModel(var userId: Long = 0,
-                     var userFirstName: String = "",
-                     var userLastName: String = "",
-                     var userEmail: String = "",
-                     var userPhone: String = "",
-                     var userDateOfBirth: String = "") : Parcelable
